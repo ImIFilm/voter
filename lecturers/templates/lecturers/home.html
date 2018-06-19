@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>home</h1>
+{% for lecturer in lecturers.all %}
+<div class="row pt-4">
+  <div class="col-2" onclick="window.location='{% url 'detail' lecturer.id %}';" style="cursor: pointer;">
+    <img src="{{ lecturer.image.url }}" class="img-fluid pt-2" />
+  </div>
+  <div class="col-6" onclick="window.location='{% url 'detail' lecturer.id %}';" style="cursor: pointer;">
+    <h3>{{ lecturer.name }}</h3>
+    <p>{{ lecturer.summary }}</p>
+  </div>
+  <div class="col-2 text-right text-primary" onclick="window.location='{% url 'detail' lecturer.id %}';" style="cursor: pointer;">
+        <h3>{{ lecturer.votes_total }}</h3>
+      </div>
+</div>
+{% endfor %}
+
+
 {% endblock %}

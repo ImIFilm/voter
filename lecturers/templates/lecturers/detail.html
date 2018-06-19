@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+  
+  <div class="row pt-3">
+      
+    <div class="col-8">
+      <img src="{{lecturer.image.url }}" class="img-fluid" />
+    </div>
+    <div class="col-4">
+      <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-lg btn-block"> Vote </button></a>
+      <p>current votes number: <b>{{ lecturer.votes_total }}</b></p>
+    </div>
+  </div>
+  
+  <div class="row pt-2">
+    <div class="col-4">
+            <h5>{{lecturer.name }}</h5>
+      <p> Added by {{ lecturer.voter.username }}</p>
+    </div>
+    <div class="col-4 text-right">
+            <p><a href="{{ lecturer.url }}">homepage</a></p>
+      <p> {{ lecturer.pub_date_pretty }}</p>
+    </div>
+  </div>
+  
+  <div class="row pt-2">
+    <div class="col-8">
+      <p>{{ lecturer.body }}</p>
+    </div>
+  </div>
+
+  <form id="upvote" method="POST" action="{% url 'upvote' lecturer.id %}">
+        {% csrf_token%}
+        <input type="hidden">
+    </form>
+
+{% endblock %}
